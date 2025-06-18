@@ -216,7 +216,7 @@
       <a href="#certifications" onclick="toggleMenu()">Certifications</a>
       <a href="#achievements" onclick="toggleMenu()">Achievements</a>
       <a href="#contact" onclick="toggleMenu()">Contact</a>
-      <a href="resume.pdf" download onclick="toggleMenu()">Résumé</a>
+      <a href="resume.pdf" download onclick="toggleMenu()">Resume</a>
       <span class="theme-switcher" onclick="toggleTheme()">🌓 <span id="themeLabel">Switch to Light Mode</span></span>
     </div>
   </nav>
@@ -300,9 +300,12 @@
   </footer>
 
   <script>
+    let menuOpened = false;
+    const navLinks = document.getElementById('navLinks');
+
     function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      nav.classList.toggle('show');
+      navLinks.classList.toggle('show');
+      menuOpened = navLinks.classList.contains('show');
     }
 
     function toggleTheme() {
@@ -320,6 +323,11 @@
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('backToTop');
       btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+
+      if (menuOpened && window.innerWidth <= 768) {
+        navLinks.classList.remove('show');
+        menuOpened = false;
+      }
     });
 
     function scrollToTop() {
