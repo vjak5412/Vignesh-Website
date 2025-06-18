@@ -1,16 +1,209 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vignesh S | Analyst</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #fff;
+      --accent: #00f3b9;
+    }
+    [data-theme="light"] {
+      --bg-color: #f9f9f9;
+      --text-color: #111;
+      --accent: #00a88a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 15, 15, 0.95);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+    }
+
+    nav a:hover, nav a:active {
+      background-color: #00f3b920;
+      border-radius: 5px;
+      transform: scale(1.1);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: var(--accent);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    .theme-switcher {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    header.hero {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 160px 20px 100px;
+      text-align: center;
+    }
+
+    .hero-content {
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    header.hero img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 12px rgba(0, 243, 185, 0.5);
+    }
+
+    header.hero h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    header.hero p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 24px;
+      color: #0f0f0f;
+      background: var(--accent);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #0fffc3;
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 960px;
+      margin: 30px auto;
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 10px;
+    }
+
+    footer {
+      background: rgba(26, 26, 26, 0.9);
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 60px;
+        left: 0;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <div class="menu-toggle" id="menuToggle">
+    <div class="menu-toggle" onclick="toggleMenu()">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
@@ -24,13 +217,13 @@
       <a href="#achievements">Achievements</a>
       <a href="#contact">Contact</a>
       <a href="resume.pdf" download>Résumé</a>
-      <span class="theme-switcher" id="themeToggle">🌓 <span id="themeLabel">Switch to light mode</span></span>
+      <span class="theme-switcher" onclick="toggleTheme()">🌓 <span id="themeText">Switch to light mode</span></span>
     </div>
   </nav>
 
   <header class="hero">
     <div class="hero-content">
-      <img src="profile.jpg" alt="Vignesh Profile" />
+      <img src="https://avatars.githubusercontent.com/u/17137044?s=400&v=4" alt="Vignesh Profile" />
       <h1>VIGNESH S</h1>
       <p>Analyst at Objectways Technologies</p>
       <a href="#about" class="btn">Know More</a>
@@ -39,12 +232,12 @@
 
   <main>
     <section id="about"><h2>About</h2><p>Analyst with experience in NLP and LiDAR, specializing in AI model training, data annotation, and object detection.</p></section>
-    <section id="experience"><h2>Experience</h2><ul><li>Working on NLP and LiDAR projects since July 2024.</li></ul></section>
-    <section id="projects"><h2>Projects</h2><ul><li>Study on ChatGPT in Education – March 2024</li></ul></section>
-    <section id="education"><h2>Education</h2><ul><li>M.Com CA – Jairams Arts and Science College, 2022–2024 – 70.88%</li></ul></section>
-    <section id="certifications"><h2>Certifications</h2><ul><li>PG Diploma in Computer Applications</li></ul></section>
-    <section id="achievements"><h2>Achievements</h2><ul><li>Leo Multiple District Secretary managing 250+ clubs</li></ul></section>
-    <section id="contact"><h2>Contact</h2><ul><li>Email: vjak5412@gmail.com</li><li>Phone: 6380405224</li></ul></section>
+    <section id="experience"><h2>Experience</h2><p>Worked on Natural Language Processing and LiDAR annotation projects at Objectways Technologies with high productivity and accuracy across shifts.</p></section>
+    <section id="projects"><h2>Projects</h2><ul><li>Study on ChatGPT in Education – led to improved self-directed learning.</li><li>Financial Inclusion – Published in International Conference, ISBN: 9789395423816.</li></ul></section>
+    <section id="education"><h2>Education</h2><ul><li>M.Com CA – Jairams Arts and Science College – 70.88%</li><li>B.Com CA – Govt Arts College – 84.85%</li><li>HSC – Rasammal Matric Hr. Sec. School – 87.83%</li><li>SSLC – Rasammal Matric Hr. Sec. School – 91.4%</li></ul></section>
+    <section id="certifications"><h2>Certifications</h2><ul><li>PG Diploma in Computer Applications</li><li>Senior Grade Typewriting English</li><li>Customer Service Simulation, Data Analytics, Power BI</li></ul></section>
+    <section id="achievements"><h2>Achievements</h2><ul><li>District Secretary of Leo Clubs managing 250+ clubs</li><li>National rankings in mime, chess, karate</li><li>Indian World Record – 60 Days 60 Stories Good Life training</li></ul></section>
+    <section id="contact"><h2>Contact</h2><p>Email: vjak5412@gmail.com<br>Phone: 6380405224<br>LinkedIn: <a href="https://linkedin.com/in/vignesh-s-89288522b" target="_blank">vignesh-s-89288522b</a></p></section>
   </main>
 
   <button id="backToTop" onclick="scrollToTop()">↑</button>
@@ -53,6 +246,37 @@
     &copy; 2025 Vignesh S. All rights reserved.
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      document.getElementById('themeText').innerText = nextTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+    }
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        btn.style.display = 'block';
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    ScrollReveal().reveal('section', {
+      duration: 1000,
+      distance: '50px',
+      origin: 'bottom',
+      reset: true
+    });
+  </script>
 </body>
 </html>
